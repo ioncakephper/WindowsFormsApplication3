@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WeblidityComponentLibrary
@@ -21,6 +16,7 @@ namespace WeblidityComponentLibrary
         }
 
         public SaveFileDialog SaveFileDialog { get; set; } = new SaveFileDialog();
+        public OpenFileDialog OpenFileDialog { get; set; } = new OpenFileDialog();
 
         public ChangeDetector ChangeDetector { get; set; } = new ChangeDetector();
 
@@ -29,6 +25,10 @@ namespace WeblidityComponentLibrary
         public event EventHandler<CreatedFileEventArgs> CreatedFile;
 
         public event EventHandler FilenameChanged;
+
+        public event EventHandler<OpeningFileEventArgs> OpeningFile;
+        public event EventHandler<OpenFileEventArgs> OpenFile;
+        public event EventHandler<OpenedFileEventArgs> OpenedFile;
 
         public event EventHandler<SavingFileEventArgs> SavingFile;
         public event EventHandler<SaveFileEventArgs> SaveFile;
@@ -148,6 +148,50 @@ namespace WeblidityComponentLibrary
         protected virtual void OnSavedFile(SavedFileEventArgs e)
         {
             SavedFile?.Invoke(this, e);
+        }
+
+        public bool OpenApplicationFile()
+        {
+            if (SaveApplicationFile())
+            {
+                if (OpenFileDialog.ShowDialog().Equals(DialogResult.OK))
+                {
+                    FileName = OpenFileDialog.FileName;
+
+                    var openingFileEventArgs = new OpeningFileEventArgs(FileName);
+                    OnOpeningFile(openingFileEventArgs);
+                    if (!openingFileEventArgs.Cancel)
+                    {
+                        var openFileEventArgs = new OpenFileEventArgs() { Failed = false, FileName = openingFileEventArgs.FileName };
+                        OnOpenFile(openFileEventArgs);
+
+                        var failed = openFileEventArgs.Failed;
+                        var openedFileEventArgs = new OpenedFileEventArgs(failed);
+                        OnOpenedFile(openedFileEventArgs);
+
+                        FileName = openFileEventArgs.FileName;
+
+                        return !openedFileEventArgs.Failed;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        protected virtual void OnOpenedFile(OpenedFileEventArgs openedFileEventArgs)
+        {
+            OpenedFile?.Invoke(this, openedFileEventArgs);
+        }
+
+        protected virtual void OnOpenFile(OpenFileEventArgs e)
+        {
+            OpenFile?.Invoke(this, e);
+        }
+
+        protected virtual void OnOpeningFile(OpeningFileEventArgs e)
+        {
+            OpeningFile?.Invoke(this, e);
         }
 
         protected virtual void OnSavingFile(SavingFileEventArgs e)
