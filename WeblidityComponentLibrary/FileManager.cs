@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright file="filemanager.cs" company="Ion Gireada">
+// <copyright file="FileManager.cs" company="Ion Gireada">
 //      Copyright (c) Ion Gireada. All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
@@ -176,7 +176,7 @@ namespace WeblidityComponentLibrary
                     ChangeDetector.Changed = false;
 
                     return !openedFileEventArgs.Failed;
-                }               
+                }
             }
 
             return false;
@@ -347,7 +347,6 @@ namespace WeblidityComponentLibrary
 
                 return !savedApplicationEventArgs.Failed;
             }
-
 
             return false;
         }
