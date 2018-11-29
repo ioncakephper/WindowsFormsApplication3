@@ -3,14 +3,14 @@
   <Class Name="WeblidityComponentLibrary.FileManager" Collapsed="true">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAACAAIAAAAACIAACCEAAAgAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABAACFAAACIAEAUhAASAgIAHIFAALkAAFAESAARAAAA=</HashCode>
       <FileName>FileManager.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="WeblidityComponentLibrary.ChangeDetector" Collapsed="true">
     <Position X="3.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAABACAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EAACQAAAACAAAgAABACAAAACAAAAAAAAAAAABgAAAAI=</HashCode>
       <FileName>ChangeDetector.cs</FileName>
     </TypeIdentifier>
   </Class>
