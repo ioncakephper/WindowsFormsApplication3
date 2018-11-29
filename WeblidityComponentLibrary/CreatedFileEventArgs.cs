@@ -18,7 +18,7 @@ namespace WeblidityComponentLibrary
         /// </summary>
         public CreatedFileEventArgs()
         {
-            Failed = false;
+            this.Failed = false;
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace WeblidityComponentLibrary
         /// <param name="failed">The failed<see cref="bool"/></param>
         public CreatedFileEventArgs(bool failed) : this()
         {
-            Failed = failed;
+            this.Failed = failed;
         }
 
         /// <summary>

@@ -16,9 +16,9 @@ namespace WeblidityComponentLibrary
     public partial class FileManager : Component
     {
         /// <summary>
-        /// Defines the _fileName
+        /// Defines the m_filename
         /// </summary>
-        private string _fileName;
+        private string m_filename;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FileManager"/> class.
@@ -99,8 +99,8 @@ namespace WeblidityComponentLibrary
         /// </summary>
         public string FileName
         {
-            get { return _fileName; }
-            set { _fileName = value; OnFilenameChanged(new EventArgs()); }
+            get { return this.m_filename; }
+            set { this.m_filename = value; this.OnFilenameChanged(new EventArgs()); }
         }
 
         /// <summary>

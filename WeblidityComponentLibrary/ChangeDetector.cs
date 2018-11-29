@@ -85,13 +85,13 @@ namespace WeblidityComponentLibrary
         /// <returns>The <see cref="bool"/></returns>
         public bool ConfirmFormClosing()
         {
-            if (!Changed)
+            if (!this.Changed)
             {
                 return false;
             }
 
-            this.DialogResult = MessageBox.Show(MessageToUser, MessageCaption, ButtonSet, MessageIcon);
-            if (this.DialogResult.Equals(CancelButton))
+            this.DialogResult = MessageBox.Show(this.MessageToUser, this.MessageCaption, this.ButtonSet, this.MessageIcon);
+            if (this.DialogResult.Equals(this.CancelButton))
             {
                 return true;
             }
