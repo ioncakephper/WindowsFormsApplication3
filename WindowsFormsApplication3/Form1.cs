@@ -29,6 +29,7 @@ namespace WindowsFormsApplication3
             fileManager1.FileName = "Phrases1.phf";
             People.AddRange(new Person[] { new Person("Ion", "Gireada"), new Person("Dale", "Cooper") });
             PopulatePeopleListBox();
+            fileManager1.ChangeDetector.Changed = false;
         }
 
         private void PopulatePeopleListBox()
@@ -36,8 +37,24 @@ namespace WindowsFormsApplication3
             listBox1.Items.Clear();
             listBox1.Items.AddRange(People.FullNames().ToArray());
             fileManager1.ChangeDetector.Changed = true;
+
             var isPeopleCountZero = listBox1.Items.Count.Equals(0);
             SetControlEnabledCountIsZero(isPeopleCountZero);
+
+            var isPeopleSelectedIndicesCountZero = listBox1.SelectedIndices.Count.Equals(0);
+            SetControlEnabledSelectedIndicesCountIsZero(isPeopleSelectedIndicesCountZero);
+        }
+
+        private void SetControlEnabledSelectedIndicesCountIsZero(bool isPeopleSelectedIndicesCountZero)
+        {
+            if (isPeopleSelectedIndicesCountZero)
+            {
+                SetControlEnabledValue(false, new ToolStripButton[] { toolStripButton3 });
+            }
+            else
+            {
+                SetControlEnabledValue(true, new ToolStripButton[] { toolStripButton3 });
+            }
         }
 
         private void SetControlEnabledCountIsZero(bool isPeopleCountZero)
@@ -164,6 +181,24 @@ namespace WindowsFormsApplication3
         private void OpenApplicationFile()
         {
             fileManager1.OpenApplicationFile();
+        }
+
+        private void fileManager1_CreateFile(object sender, WeblidityComponentLibrary.CreateFileEventArgs e)
+        {
+            People = new PeopleList();
+            PopulatePeopleListBox();
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedIndices.Count > 0)
+            {
+                if (MessageBox.Show("Do you want to remove selected item", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning).Equals(DialogResult.Yes))
+                {
+                    People.RemoveAt(listBox1.SelectedIndices[0]);
+                }
+            }
+            PopulatePeopleListBox();
         }
     }
 }

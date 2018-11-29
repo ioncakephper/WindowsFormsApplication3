@@ -89,31 +89,32 @@ namespace WindowsFormsApplication3
 
         public IEnumerator<Person> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return _list.GetEnumerator();
         }
 
         public int IndexOf(Person item)
         {
-            throw new NotImplementedException();
+            return _list.IndexOf(item);
         }
 
         public void Insert(int index, Person item)
         {
-            throw new NotImplementedException();
+            _list.Insert(index, item);
         }
 
         public bool Remove(Person item)
         {
-            throw new NotImplementedException();
+            return _list.Remove(item);
         }
 
         public void RemoveAt(int index)
         {
-            throw new NotImplementedException();
+            _list.RemoveAt(index);
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
+            // return _list(GetEnumerator());
             throw new NotImplementedException();
         }
     }
